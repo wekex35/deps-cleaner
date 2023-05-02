@@ -3,6 +3,8 @@ name: Build and Release
 on:
   release:
     types: [created]
+  push:
+    branches: [ github-action-test ]
   workflow_dispatch:
 
 permissions:
@@ -15,7 +17,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ linux ]
+        # windows-latest, macOS-latest]
     steps:
     - name: Checkout
       uses: actions/checkout@v2
