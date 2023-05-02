@@ -27,7 +27,7 @@ jobs:
       id: go
 
     - name: Setup Fyne
-      run: go get fyne.io/fyne@latest
+      run: go install fyne.io/fyne/v2/cmd/fyne@latest
 
     - name: Build
       run: fyne package -os ${{ matrix.os }}
