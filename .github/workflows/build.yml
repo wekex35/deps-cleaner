@@ -35,7 +35,9 @@ jobs:
         sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
 
     - name: Build
-      run: fyne package 
+      run: |
+        fyne package 
+        ls
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
