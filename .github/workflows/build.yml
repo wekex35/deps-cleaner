@@ -16,48 +16,48 @@ jobs:
     name: Build for ${{ matrix.os.name }}
     runs-on: ${{ matrix.os.host }}
     strategy:
-      matrix:
-        os: 
-          # - name: macos
-          #   host: macOS-latest
-          #   ext: app 
-          #   command: 
+      matrix: 
+        os: []
+    #       # - name: macos
+    #       #   host: macOS-latest
+    #       #   ext: app 
+    #       #   command: 
 
-          # - name: windows
-          #   host: windows-latest
-          #   ext: exe
-          #   command: 
+    #       # - name: windows
+    #       #   host: windows-latest
+    #       #   ext: exe
+    #       #   command: 
 
-          - name: ubuntu
-            host: ubuntu-latest
-            ext: tar.xz
-            command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
-        # windows-latest, macOS-latest]
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    #       - name: ubuntu
+    #         host: ubuntu-latest
+    #         ext: tar.xz
+    #         command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
+    #     # windows-latest, macOS-latest]
+    # steps:
+    # - name: Checkout
+    #   uses: actions/checkout@v2
 
-    - name: Setup Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.17
-      id: go
+    # - name: Setup Go
+    #   uses: actions/setup-go@v2
+    #   with:
+    #     go-version: 1.17
+    #   id: go
 
-    - name: Setup Fyne
-      run: |
-        go install fyne.io/fyne/v2/cmd/fyne@latest
-        ${{ matrix.os.command }}
+    # - name: Setup Fyne
+    #   run: |
+    #     go install fyne.io/fyne/v2/cmd/fyne@latest
+    #     ${{ matrix.os.command }}
 
-    - name: Build
-      run: |
-        fyne package 
-        dir
+    # - name: Build
+    #   run: |
+    #     fyne package 
+    #     dir
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: deps-cleaner.${{ matrix.os.ext }}
-        path: deps-cleaner.${{ matrix.os.ext }}
+    # - name: Upload Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: deps-cleaner.${{ matrix.os.ext }}
+    #     path: deps-cleaner.${{ matrix.os.ext }}
   
   release:
     name: Create Release
