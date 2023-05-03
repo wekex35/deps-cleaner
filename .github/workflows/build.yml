@@ -75,25 +75,25 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        body: |
-          Changes in this Release:
-          - Add new feature
-          - Fix bugs
+        # body: |
+        #   Changes in this Release:
+        #   - Add new feature
+        #   - Fix bugs
         draft: false
         prerelease: false
-        token: ${{ secrets.GITHUB_TOKEN }}
+        # token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Get Artifact
       uses: actions/download-artifact@v2
       with:
-        name: deps-cleaner-${{ matrix.os }}
+        name: deps-cleaner.${{ matrix.os.ext }}
         path: dist
 
     - name: Upload Artifact
       uses: actions/upload-release-asset@v1.0.1
       with:
-        asset_path: dist/deps-cleaner-${{ matrix.os }}
-        asset_name: deps-cleaner-${{ matrix.os }}
+        asset_path: dist/deps-cleaner.${{ matrix.os.ext }}
+        asset_name: deps-cleaner.${{ matrix.os.ext }}
         asset_content_type: application/octet-stream
         release_id: ${{ steps.create_release.outputs.release_id }}
         token: ${{ secrets.GITHUB_TOKEN }}
