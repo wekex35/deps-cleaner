@@ -30,7 +30,9 @@ jobs:
       id: go
 
     - name: Setup Fyne
-      run: go install fyne.io/fyne/v2/cmd/fyne@latest
+      run: |
+        go install fyne.io/fyne/v2/cmd/fyne@latest
+        sudo apt-cache policy libx11-dev
 
     - name: Build
       run: fyne package 
