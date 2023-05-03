@@ -32,7 +32,7 @@ jobs:
     - name: Setup Fyne
       run: |
         go install fyne.io/fyne/v2/cmd/fyne@latest
-        sudo apt-cache policy libx11-dev
+        sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
 
     - name: Build
       run: fyne package 
