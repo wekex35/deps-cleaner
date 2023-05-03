@@ -18,15 +18,15 @@ jobs:
     strategy:
       matrix:
         os: 
-          - name: macos
-            host: macOS-latest
-            ext: app 
-            command: 
-
-          # - name: windows
-          #   host: windows-latest
-          #   ext: exe
+          # - name: macos
+          #   host: macOS-latest
+          #   ext: app 
           #   command: 
+
+          - name: windows
+            host: windows-latest
+            ext: exe
+            command: 
 
           # - name: ubuntu
           #   host: ubuntu-latest
@@ -51,13 +51,13 @@ jobs:
     - name: Build
       run: |
         fyne package 
-        ls
+        dir
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: deps-cleaner-${{ matrix.os.ext }}
-        path: deps-cleaner-${{ matrix.os.ext }}
+        name: deps-cleaner.${{ matrix.os.ext }}
+        path: deps-cleaner.${{ matrix.os.ext }}
   
   release:
     name: Create Release
