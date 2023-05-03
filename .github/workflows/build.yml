@@ -19,7 +19,7 @@ jobs:
       matrix:
         os: 
           - name: macos
-            host: macOS
+            host: macOS-latest
             ext: app 
             command: 
 
