@@ -13,11 +13,25 @@ permissions:
 
 jobs:
   build:
-    name: Build for ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build for ${{ matrix.os.name }}
+    runs-on: ${{ matrix.os.host }}
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
+        os: 
+          - name: macos
+            host: macos-lastest
+            ext: app 
+            command: 
+
+          # - name: windows
+          #   host: windows-latest
+          #   ext: exe
+          #   command: 
+
+          # - name: ubuntu
+          #   host: ubuntu-latest
+          #   ext: tar.xz
+          #   command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
         # windows-latest, macOS-latest]
     steps:
     - name: Checkout
@@ -32,7 +46,7 @@ jobs:
     - name: Setup Fyne
       run: |
         go install fyne.io/fyne/v2/cmd/fyne@latest
-        sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
+        ${{ matrix.os.command }}
 
     - name: Build
       run: |
@@ -42,9 +56,9 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: deps-cleaner-${{ matrix.os }}
-        path: dist/deps-cleaner-${{ matrix.os }}
-
+        name: deps-cleaner-${{ matrix.os.ext }}
+        path: deps-cleaner-${{ matrix.os.ext }}
+  
   release:
     name: Create Release
     needs: build
