@@ -23,15 +23,15 @@ jobs:
           #   ext: app 
           #   command: 
 
-          - name: windows
-            host: windows-latest
-            ext: exe
-            command: 
+          # - name: windows
+          #   host: windows-latest
+          #   ext: exe
+          #   command: 
 
-          # - name: ubuntu
-          #   host: ubuntu-latest
-          #   ext: tar.xz
-          #   command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
+          - name: ubuntu
+            host: ubuntu-latest
+            ext: tar.xz
+            command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
         # windows-latest, macOS-latest]
     steps:
     - name: Checkout
