@@ -66,14 +66,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
+        
+
+      - name: Display structure
+        run: |
+          cd /home/runner/work/deps-cleaner
+          ls -R
+
       - name: Get Artifact
         uses: actions/download-artifact@v2
         with:
           path: dist
 
       - name: Display structure of downloaded files
-        run: ls
+        run: ls -R
         working-directory: dist
 
       - name: Create Release
@@ -83,7 +89,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            "dist/deps-cleaner.tar.xz"
+            "dist/deps-cleaner.tar.xz/deps-cleaner.tar.xz"
             "./deps-cleaner.tar.xz"
             "./dist/deps-cleaner.tar.xz"
           body: |
