@@ -120,8 +120,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          artifacts: |
-            dist/deps-cleaner.tar.xz
+          artifacts: "dist/deps-cleaner.tar.xz"
           body: |
             Changes in this Release
             - First Change
