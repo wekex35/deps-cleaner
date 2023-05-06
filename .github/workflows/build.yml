@@ -13,17 +13,17 @@ jobs:
     strategy:
       matrix:
         os: 
-          - name: macos
-            host: macOS-latest
-            ext: app 
-            command: 
-            ls: ls
+          # - name: macos
+          #   host: macOS-latest
+          #   ext: app 
+          #   command: 
+          #   ls: ls
 
-          - name: windows
-            host: windows-latest
-            ext: exe
-            command: 
-            ls: dir
+          # - name: windows
+          #   host: windows-latest
+          #   ext: exe
+          #   command: 
+          #   ls: dir
 
           - name: ubuntu
             host: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
           path: dist
 
       - name: Display structure of downloaded files
-        run: ls -R
+        run: ls
         working-directory: dist
 
       - name: Create Release
@@ -84,8 +84,8 @@ jobs:
         with:
           artifacts: |
             "dist/deps-cleaner.tar.xz"
-            "dist/deps-cleaner.app"
-            "dist/deps-cleaner.exe"
+            "./deps-cleaner.tar.xz"
+            "./dist/deps-cleaner.tar.xz"
           body: |
             Changes in this Release
             - First Change
