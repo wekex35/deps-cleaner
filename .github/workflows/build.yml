@@ -19,17 +19,17 @@ jobs:
             command: 
             ls: ls
 
-          # - name: windows
-          #   host: windows-latest
-          #   ext: exe
-          #   command: 
-          #   ls: dir
+          - name: windows
+            host: windows-latest
+            ext: exe
+            command: 
+            ls: dir
 
-          # - name: ubuntu
-          #   host: ubuntu-latest
-          #   ext: tar.xz
-          #   command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
-          #   ls: ls
+          - name: ubuntu
+            host: ubuntu-latest
+            ext: tar.xz
+            command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
+            ls: ls
         # windows-latest, macOS-latest]
     steps:
     - name: Checkout
@@ -54,7 +54,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: deps-cleaner.app
+        name: deps-cleaner. ${{ matrix.os.ext }}
         path: .
 
 
@@ -83,9 +83,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            "dist/builds/deps-cleaner.tar.xz"
-            "dist/builds/deps-cleaner.app"
-            "dist/builds/deps-cleaner.exe"
+            "dist/deps-cleaner.tar.xz"
+            "dist/deps-cleaner.app"
+            "dist/deps-cleaner.exe"
           body: |
             Changes in this Release
             - First Change
