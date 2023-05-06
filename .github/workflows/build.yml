@@ -1,11 +1,9 @@
 name: Build and Release
 
 on:
-  release:
-    types: [created]
   push:
-    branches: [ github-action-test ]
-  workflow_dispatch:
+    tags:
+      - 'v*'
 
 permissions:
     contents: read
@@ -72,6 +70,8 @@ jobs:
     - name: Create Release
       id: create_release
       uses: ncipollo/release-action@v1
+      env:           
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         artifacts: |
           dist/**/*
@@ -87,7 +87,7 @@ jobs:
     
 
     - name: Get Artifact
-      uses: ncipollo/release-action@v1
+      uses: actions/download-artifact@v2
       with:
         name: deps-cleaner.tar.xz
         path: dist
