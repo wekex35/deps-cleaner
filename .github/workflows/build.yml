@@ -77,12 +77,14 @@ jobs:
           dist/**/*
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        # body: |
-        #   Changes in this Release:
-        #   - Add new feature
-        #   - Fix bugs
+        body: |
+          Changes in this Release:
+          - Add new feature
+          - Fix bugs
         draft: false
         prerelease: false
+        tag: ${{ github.ref }}
+    
 
     - name: Get Artifact
       uses: ncipollo/release-action@v1
