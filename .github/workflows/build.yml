@@ -110,7 +110,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            dist/**/*
+            deps-cleaner*
           body: |
             Changes in this Release
             - First Change
