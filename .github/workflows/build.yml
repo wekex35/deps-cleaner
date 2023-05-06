@@ -121,7 +121,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            deps-cleaner.tar.xz
+            dist/deps-cleaner.tar.xz
           body: |
             Changes in this Release
             - First Change
