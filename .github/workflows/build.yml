@@ -98,6 +98,8 @@ jobs:
   #       release_id: ${{ steps.create_release.outputs.release_id }}
   #       token: ${{ secrets.GITHUB_TOKEN }}
   create_release:
+    name: Create Release
+    needs: build  
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -108,7 +110,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            build/dist/**/*
+            dist/**/*
           body: |
             Changes in this Release
             - First Change
