@@ -13,15 +13,15 @@ jobs:
     strategy:
       matrix:
         os: 
-          # - name: macos
-          #   host: macOS-latest
-          #   ext: app 
-          #   command: 
+          - name: macos
+            host: macOS-latest
+            ext: app 
+            command: 
 
-          # - name: windows
-          #   host: windows-latest
-          #   ext: exe
-          #   command: 
+          - name: windows
+            host: windows-latest
+            ext: exe
+            command: 
 
           - name: ubuntu
             host: ubuntu-latest
@@ -51,52 +51,10 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: deps-cleaner.tar.xz
-        path: deps-cleaner.tar.xz
-  
-  # release:
-  #   name: Create Release
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2
+        name: deps-cleaner.${{ matrix.os.ext }}
 
-  #   - name: Create Release
-  #     id: create_release
-  #     uses: ncipollo/release-action@v1
-  #     env:           
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #     with:
-  #       artifacts: |
-  #         dist/**/*
-  #       tag_name: ${{ github.ref }}
-  #       release_name: Release ${{ github.ref }}
-  #       body: |
-  #         Changes in this Release:
-  #         - Add new feature
-  #         - Fix bugs
-  #       draft: false
-  #       prerelease: false
-  #       tag: ${{ github.ref }}
-    
 
-  #   - name: Get Artifact
-  #     uses: actions/download-artifact@v2
-  #     with:
-  #       name: deps-cleaner.tar.xz
-  #       path: dist
 
-  #   - name: Upload Artifact
-  #     uses: actions/upload-release-asset@v1.0.1
-  #     with:
-  #       asset_path: dist/deps-cleaner.tar.xz
-  #       asset_name: deps-cleaner.tar.xz
-  #       asset_content_type: application/octet-stream
-  #       release_id: ${{ steps.create_release.outputs.release_id }}
-  #       token: ${{ secrets.GITHUB_TOKEN }}
   create_release:
     name: Create Release
     needs: build  
@@ -122,6 +80,8 @@ jobs:
         with:
           artifacts: |
             "dist/deps-cleaner.tar.xz/deps-cleaner.tar.xz"
+            "dist/deps-cleaner.app/deps-cleaner.app"
+            "dist/deps-cleaner.exe/deps-cleaner.exe"
           body: |
             Changes in this Release
             - First Change
