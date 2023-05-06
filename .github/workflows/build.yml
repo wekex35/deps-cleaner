@@ -102,7 +102,7 @@ jobs:
           bodyFile: "release-notes.md"
           draft: false
           prerelease: false
-          tag: "Version ${github.ref_name}: Release Notes"
+          tag: ${{github.ref_name}}
 
 
   
