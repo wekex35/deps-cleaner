@@ -13,17 +13,17 @@ jobs:
     strategy:
       matrix:
         os: 
-          # - name: macos
-          #   host: macOS-latest
-          #   ext: app 
-          #   command: 
-          #   ls: ls
+          - name: macos
+            host: macOS-latest
+            ext: app 
+            command: 
+            ls: ls
 
-          # - name: windows
-          #   host: windows-latest
-          #   ext: exe
-          #   command: 
-          #   ls: dir
+          - name: windows
+            host: windows-latest
+            ext: exe
+            command: 
+            ls: dir
 
           - name: ubuntu
             host: ubuntu-latest
@@ -73,17 +73,17 @@ jobs:
           name: deps-cleaner.tar.xz
           path: dist
 
-      # - name: Get Windows Artifact
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: deps-cleaner.exe
-      #     path: dist
+      - name: Get Windows Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: deps-cleaner.exe
+          path: dist
 
-      # - name: Get macOS Artifact
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: deps-cleaner.app
-      #     path: dist
+      - name: Get macOS Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: deps-cleaner.app
+          path: dist
 
       - name: Display structure of downloaded files
         run: ls -R
@@ -95,7 +95,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          artifacts:  "dist/deps-cleaner.tar.xz"
+          artifacts:  "dist/deps-cleaner.tar.xz,dist/deps-cleaner.app,dist/deps-cleaner.exe"
           bodyFile: "release-notes.md"
           draft: false
           prerelease: false
