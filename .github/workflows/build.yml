@@ -102,7 +102,15 @@ jobs:
     needs: build  
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Get Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: deps-cleaner.*
+          path: dist
+
       - name: Create Release
         id: create_release
         uses: ncipollo/release-action@v1
@@ -110,7 +118,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            deps-cleaner.*
+            dist/**
           body: |
             Changes in this Release
             - First Change
@@ -119,18 +127,14 @@ jobs:
           prerelease: false
           tag: ${{ github.ref }}
 
-      - name: Get Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: deps-cleaner.tar.xz
-          path: dist
+
   
-      - name: Upload Artifact
-        uses: actions/upload-release-asset@v1.0.1
-        with:
-          asset_path: dist/deps-cleaner.tar.xz
-          asset_name: deps-cleaner.tar.xz
-          asset_content_type: application/octet-stream
-          release_id: ${{ steps.create_release.outputs.release_id }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Upload Artifact
+      #   uses: actions/upload-release-asset@v1.0.1
+      #   with:
+      #     asset_path: dist/deps-cleaner.tar.xz
+      #     asset_name: deps-cleaner.tar.xz
+      #     asset_content_type: application/octet-stream
+      #     release_id: ${{ steps.create_release.outputs.release_id }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
   
