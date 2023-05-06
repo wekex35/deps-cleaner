@@ -66,16 +66,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
 
-      - name: Display structure
-        run: |
-          cd /home/runner/work/deps-cleaner
-          ls -R
-
-      - name: Get Artifact
+      - name: Get Ubuntu Artifact
         uses: actions/download-artifact@v2
         with:
+          name: deps-cleaner.tar.xz
+          path: dist
+
+      - name: Get Windows Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: deps-cleaner.exe
+          path: dist
+
+      - name: Get macOS Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: deps-cleaner.app
           path: dist
 
       - name: Display structure of downloaded files
@@ -89,16 +96,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            "dist/deps-cleaner.tar.xz/deps-cleaner.tar.xz"
-            "./deps-cleaner.tar.xz"
-            "./dist/deps-cleaner.tar.xz"
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
+            "dist/deps-cleaner.tar.xz"
+            "dist/deps-cleaner.app"
+            "dist/deps-cleaner.exe"
+          bodyFile: "release-notes.md"
           draft: false
           prerelease: false
-          tag: ${{ github.ref }}
+          tag: "Version ${github.ref_name}: Release Notes"
 
 
   
