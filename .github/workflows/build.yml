@@ -13,17 +13,17 @@ jobs:
     strategy:
       matrix:
         os: 
-          # - name: macos
-          #   host: macOS-latest
-          #   ext: app 
-          #   command: 
-          #   ls: ls
+          - name: macos
+            host: macOS-latest
+            ext: app 
+            command: 
+            ls: ls
 
-          # - name: windows
-          #   host: windows-latest
-          #   ext: exe
-          #   command: 
-          #   ls: dir
+          - name: windows
+            host: windows-latest
+            ext: exe
+            command: 
+            ls: dir
 
           - name: ubuntu
             host: ubuntu-latest
