@@ -121,7 +121,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: |
-            dist/**
+            dist/*
           body: |
             Changes in this Release
             - First Change
