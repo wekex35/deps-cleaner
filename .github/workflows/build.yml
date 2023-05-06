@@ -19,17 +19,17 @@ jobs:
             command: 
             ls: ls
 
-          - name: windows
-            host: windows-latest
-            ext: exe
-            command: 
-            ls: dir
+          # - name: windows
+          #   host: windows-latest
+          #   ext: exe
+          #   command: 
+          #   ls: dir
 
-          - name: ubuntu
-            host: ubuntu-latest
-            ext: tar.xz
-            command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
-            ls: ls
+          # - name: ubuntu
+          #   host: ubuntu-latest
+          #   ext: tar.xz
+          #   command: sudo apt-get install golang gcc libgl1-mesa-dev xorg-dev
+          #   ls: ls
         # windows-latest, macOS-latest]
     steps:
     - name: Checkout
@@ -67,17 +67,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Get Ubuntu Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: deps-cleaner.tar.xz
-          path: dist
+      # - name: Get Ubuntu Artifact
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: deps-cleaner.tar.xz
+      #     path: dist
 
-      - name: Get Windows Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: deps-cleaner.exe
-          path: dist
+      # - name: Get Windows Artifact
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: deps-cleaner.exe
+      #     path: dist
 
       - name: Get macOS Artifact
         uses: actions/download-artifact@v2
@@ -86,7 +86,11 @@ jobs:
           path: dist
 
       - name: Display structure of downloaded files
-        run: ls -R
+        run: |
+          ls -R
+          zip -r deps-cleaner.app.zip deps-cleaner.app
+          rm -rf deps-cleaner.app
+
         working-directory: dist
 
       - name: Create Release
@@ -95,20 +99,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          artifacts:  "dist/deps-cleaner.tar.xz,dist/deps-cleaner.app,dist/deps-cleaner.exe"
+          artifacts:  "dist/deps-cleaner.tar.xz,dist/deps-cleaner.app.zip,dist/deps-cleaner.exe"
           bodyFile: "release-notes.md"
           draft: false
           prerelease: false
           tag: ${{github.ref_name}}
-
-
-  
-      # - name: Upload Artifact
-      #   uses: actions/upload-release-asset@v1.0.1
-      #   with:
-      #     asset_path: dist/deps-cleaner.tar.xz
-      #     asset_name: deps-cleaner.tar.xz
-      #     asset_content_type: application/octet-stream
-      #     release_id: ${{ steps.create_release.outputs.release_id }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-  

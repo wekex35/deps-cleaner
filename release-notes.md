@@ -1,6 +1,6 @@
 
-- Born into this world to delete unwanted directories and files.
-- I Can destroy(delete) the files and folder on your command from the path you will select.
+- I came into this world with one mission: to ruthlessly obliterate any pesky directories or files that dare to clutter up your space. Watch out, clutter - I'm coming for you!
+- Ready to unleash some destruction on your files and folders? Look no further - I'm your guy! Just give me the green light and I'll make those pesky files disappear faster than you can say 'bye bye, clutter!'
 <!-- 
 ## Enhancements
 - [Enhancement 1] Description of enhancement 1.
