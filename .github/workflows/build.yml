@@ -9,7 +9,8 @@ name: Create Release
 permissions:
   contents: read
   pull-requests: write
-  issues: 'write'
+  issues: write
+
 jobs:
   build:
     name: Create Release
