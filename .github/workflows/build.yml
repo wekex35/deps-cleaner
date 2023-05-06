@@ -48,7 +48,7 @@ jobs:
 
     - name: Build
       run: |
-        fyne package
+        fyne package -os darwin
         ${{ matrix.os.ls }}
 
     - name: Upload Artifact
